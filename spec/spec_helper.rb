@@ -63,4 +63,3 @@ RSpec.configure do |config|
   # database and you’ll be able to test with some sample data
   # (eg. Countries, States, etc.)
 end
-© 2020 GitHub, Inc.
