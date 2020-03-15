@@ -9,6 +9,9 @@ jobs:
           name: build docker containers
           command: docker-compose build
       - run:
+          name: wait to load db
+          command: sleep 5
+      - run:
           name: create database
           command: docker-compose run -e "RAILS_ENV=test" app bundle exec rake db:setup db:migrate
       - run:
