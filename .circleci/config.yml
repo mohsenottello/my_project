@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: build docker containers
+          command: docker-compose build
+      - run:
+          name: wait to load db
+          command: sleep 5
+      - run:
+          name: create database
+          command: docker-compose run -e "RAILS_ENV=test" app bundle exec rake db:setup db:migrate
+      - run:
+          name: run rspec test
+          command: docker-compose run -e "RAILS_ENV=test" app bundle exec rspec
