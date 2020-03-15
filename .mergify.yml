@@ -1,7 +1,6 @@
 pull_request_rules:
   - name: automatic merge for master when CI passes
     conditions:
-      - "status-success=ci/circleci: build"
       - "status-success=workflow"
       - base=master
       - label!=work-in-progress
