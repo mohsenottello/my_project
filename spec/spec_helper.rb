@@ -1,7 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
@@ -60,6 +60,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.global_fixtures = :all
   # This will pick up all of the fixtures defined in spec/fixtures into your
-  # database and you’ll be able to test with some sample data
+  # database and you will be able to test with some sample data
   # (eg. Countries, States, etc.)
 end
