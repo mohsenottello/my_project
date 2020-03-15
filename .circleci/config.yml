@@ -1,8 +1,9 @@
-version: 2
+version: 2.1
 jobs:
-  build:
+  build-and-test:
     machine: true
     working_directory: ~/repo
+    description: build docker containers
     steps:
       - checkout
       - run:
@@ -12,11 +13,17 @@ jobs:
           name: wait to load db
           command: sleep 5
       - run:
-          name: run rubocop
-          command: docker-compose run app bundle exec rubocop
-      - run:
-          name: create database
+          name: create databases
           command: docker-compose run -e "RAILS_ENV=test" app bundle exec rake db:setup db:migrate
+      - run:
+          name: run rubocop
+          command: docker-compose run -e "RAILS_ENV=test" app bundle exec rubocop
       - run:
           name: run rspec test
           command: docker-compose run -e "RAILS_ENV=test" app bundle exec rspec
+
+workflows:
+  version: 2.1
+  build-and-test:
+    jobs:
+      - build-and-test
